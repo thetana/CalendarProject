@@ -1,0 +1,34 @@
+package com.calendarproject.service;
+
+import com.calendarproject.dto.CreateCommentRequest;
+import com.calendarproject.dto.CreateCommentResponse;
+import com.calendarproject.entity.Comment;
+import com.calendarproject.repository.CommentRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+public class CommentService {
+    private final CommentRepository commentRepository;
+
+    @Transactional
+    public CreateCommentResponse save(CreateCommentRequest request) {
+        if (commentRepository.countByScheduleId(request.scheduleId()) >= 10) {
+            throw new IllegalStateException("댓글의 제한 수를 초과 했습니다");
+        }
+        Comment comment = new Comment(request.content(),
+                request.writer(),
+                request.scheduleId(),
+                request.password());
+        Comment savedComment = commentRepository.save(comment);
+        return new CreateCommentResponse(savedComment.getId(),
+                savedComment.getContent(),
+                savedComment.getWriter(),
+                savedComment.getScheduleId(),
+                savedComment.getCreatedAt(),
+                savedComment.getModifiedAt());
+    }
+
+}
