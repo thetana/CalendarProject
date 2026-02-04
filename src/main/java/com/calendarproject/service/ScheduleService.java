@@ -1,7 +1,9 @@
 package com.calendarproject.service;
 
 import com.calendarproject.dto.*;
+import com.calendarproject.entity.Comment;
 import com.calendarproject.entity.Schedule;
+import com.calendarproject.repository.CommentRepository;
 import com.calendarproject.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
+    private final CommentRepository commentRepository;
 
     @Transactional
     public CreateScheduleResponse save(CreateScheduleRequest request) {
@@ -58,11 +61,23 @@ public class ScheduleService {
                 () -> new NoSuchElementException("존재하지 않는 일정 입니다.")
         );
 
+        List<GetCommentsResponse> dtos = new ArrayList<>();
+        for (Comment comment : commentRepository.findAllByScheduleId(id)) {
+            GetCommentsResponse dto = new GetCommentsResponse(comment.getId(),
+                    comment.getScheduleId(),
+                    comment.getContent(),
+                    comment.getWriter(),
+                    comment.getCreatedAt(),
+                    comment.getModifiedAt());
+            dtos.add(dto);
+        }
+
         return new GetScheduleResponse(
                 schedule.getId(),
                 schedule.getTitle(),
                 schedule.getDetails(),
                 schedule.getWriter(),
+                dtos,
                 schedule.getCreatedAt(),
                 schedule.getModifiedAt()
         );

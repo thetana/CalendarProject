@@ -1,7 +1,9 @@
 package com.calendarproject.controller;
 
 import com.calendarproject.dto.*;
+import com.calendarproject.entity.Schedule;
 import com.calendarproject.service.ScheduleService;
+import com.calendarproject.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,10 @@ public class ScheduleController {
 
     @PostMapping("/schedules")
     public ResponseEntity<?> create(@RequestBody CreateScheduleRequest request) {
+        BadRequestDto dto = Validator.validate(request, Schedule.class);
+        if(!dto.isOk){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
+        }
         CreateScheduleResponse result = scheduleService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
@@ -38,8 +44,12 @@ public class ScheduleController {
     }
 
     @PatchMapping("/schedules/{id}")
-    public ResponseEntity<UpdateScheduleResponse> update(@PathVariable Long id, @RequestBody UpdateScheduleRequest request) {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody UpdateScheduleRequest request) {
         try {
+            BadRequestDto dto = Validator.validate(request, Schedule.class);
+            if(!dto.isOk){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
+            }
             UpdateScheduleResponse result = scheduleService.update(id, request);
             return ResponseEntity.status(HttpStatus.OK).body(result);
         } catch (NoSuchElementException e) {

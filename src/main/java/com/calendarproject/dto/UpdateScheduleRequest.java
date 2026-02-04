@@ -1,4 +1,4 @@
 package com.calendarproject.dto;
 
-public record UpdateScheduleRequest(Long id, String title, String writer, String password) {
+public record UpdateScheduleRequest(String title, String writer, String password) {
 }

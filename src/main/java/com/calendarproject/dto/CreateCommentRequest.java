@@ -1,4 +1,4 @@
 package com.calendarproject.dto;
 
-public record CreateCommentRequest(String content, String writer, Long scheduleId, String password) {
+public record CreateCommentRequest(Long scheduleId, String content, String writer, String password) {
 }

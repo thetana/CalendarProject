@@ -18,15 +18,15 @@ public class CommentService {
         if (commentRepository.countByScheduleId(request.scheduleId()) >= 10) {
             throw new IllegalStateException("댓글의 제한 수를 초과 했습니다");
         }
-        Comment comment = new Comment(request.content(),
+        Comment comment = new Comment(request.scheduleId(),
+                request.content(),
                 request.writer(),
-                request.scheduleId(),
                 request.password());
         Comment savedComment = commentRepository.save(comment);
         return new CreateCommentResponse(savedComment.getId(),
+                savedComment.getScheduleId(),
                 savedComment.getContent(),
                 savedComment.getWriter(),
-                savedComment.getScheduleId(),
                 savedComment.getCreatedAt(),
                 savedComment.getModifiedAt());
     }

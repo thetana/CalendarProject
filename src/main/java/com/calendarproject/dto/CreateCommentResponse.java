@@ -2,5 +2,5 @@ package com.calendarproject.dto;
 
 import java.time.LocalDateTime;
 
-public record CreateCommentResponse(Long id, String content, String writer, Long scheduleId, LocalDateTime createdAt, LocalDateTime modifiedAt) {
+public record CreateCommentResponse(Long id, Long scheduleId, String content, String writer, LocalDateTime createdAt, LocalDateTime modifiedAt) {
 }
