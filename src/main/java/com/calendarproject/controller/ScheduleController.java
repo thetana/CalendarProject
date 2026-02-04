@@ -48,4 +48,16 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
     }
+
+    @DeleteMapping("/schedules/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id, @RequestBody DeleteScheduleRequest request) {
+        try {
+            scheduleService.delete(id, request);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+    }
 }

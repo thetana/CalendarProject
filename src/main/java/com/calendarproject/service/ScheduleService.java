@@ -88,4 +88,15 @@ public class ScheduleService {
         );
         return response;
     }
+
+    @Transactional
+    public void delete(Long id, DeleteScheduleRequest request) {
+        Schedule schedule = scheduleRepository.findById(id).orElseThrow(
+                () -> new NoSuchElementException("존재하지 않는 일정 입니다.")
+        );
+        if (!schedule.getPassword().equals(request.password())) {
+            throw new IllegalStateException("비밀번호가 일치하지 않습니다.");
+        }
+        scheduleRepository.deleteById(id);
+    }
 }
