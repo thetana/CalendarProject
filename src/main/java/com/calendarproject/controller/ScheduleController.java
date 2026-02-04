@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,5 +25,15 @@ public class ScheduleController {
     public ResponseEntity<List<GetSchedulesResponse>> getAll(@RequestParam(required = false) String title) {
         List<GetSchedulesResponse> result = scheduleService.getAll(title);
         return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @GetMapping("/schedules/{id}")
+    public ResponseEntity<GetScheduleResponse> getOne(@PathVariable Long id) {
+        try {
+            GetScheduleResponse result = scheduleService.getOne(id);
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }

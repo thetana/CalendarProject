@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -49,5 +50,21 @@ public class ScheduleService {
             dtos.add(dto);
         }
         return dtos;
+    }
+
+    @Transactional(readOnly = true)
+    public GetScheduleResponse getOne(Long id) {
+        Schedule schedule = scheduleRepository.findById(id).orElseThrow(
+                () -> new NoSuchElementException("존재하지 않는 일정 입니다.")
+        );
+
+        return new GetScheduleResponse(
+                schedule.getId(),
+                schedule.getTitle(),
+                schedule.getDetails(),
+                schedule.getWriter(),
+                schedule.getCreatedAt(),
+                schedule.getModifiedAt()
+        );
     }
 }
