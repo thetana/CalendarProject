@@ -305,7 +305,7 @@ erDiagram
 <!-- CONTACT -->
 ## Contact
 
-[성기찬](https://www.instagram.com/) - zxsa13577@gmail.com
+[성기찬](https://www.instagram.com/zxsa135/) - zxsa13577@gmail.com
 
 Project Link: [https://github.com/thetana/CalendarProject](https://github.com/thetana/CalendarProject)
 
