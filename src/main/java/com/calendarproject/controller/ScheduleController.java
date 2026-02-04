@@ -36,4 +36,16 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+    @PatchMapping("/schedules/{id}")
+    public ResponseEntity<UpdateScheduleResponse> update(@PathVariable Long id, @RequestBody UpdateScheduleRequest request) {
+        try {
+            UpdateScheduleResponse result = scheduleService.update(id, request);
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+    }
 }
