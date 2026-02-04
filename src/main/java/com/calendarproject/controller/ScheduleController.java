@@ -20,7 +20,7 @@ public class ScheduleController {
     @PostMapping("/schedules")
     public ResponseEntity<?> create(@RequestBody CreateScheduleRequest request) {
         BadRequestDto dto = Validator.validate(request, Schedule.class);
-        if(!dto.isOk){
+        if(!dto.isOk()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
         }
         CreateScheduleResponse result = scheduleService.save(request);
@@ -47,7 +47,7 @@ public class ScheduleController {
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody UpdateScheduleRequest request) {
         try {
             BadRequestDto dto = Validator.validate(request, Schedule.class);
-            if(!dto.isOk){
+            if(!dto.isOk()){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
             }
             UpdateScheduleResponse result = scheduleService.update(id, request);

@@ -5,6 +5,7 @@ import com.calendarproject.entity.Comment;
 import com.calendarproject.entity.Schedule;
 import com.calendarproject.repository.CommentRepository;
 import com.calendarproject.repository.ScheduleRepository;
+import com.calendarproject.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +38,7 @@ public class ScheduleService {
     @Transactional(readOnly = true)
     public List<GetSchedulesResponse> getAll(String title) {
         List<Schedule> schedules;
-        if (title == null || title.isBlank()) {
+        if (Validator.isNullOrEmpty(title)) {
             schedules = scheduleRepository.findAllByOrderByModifiedAtDesc();
         } else {
             schedules = scheduleRepository.findByTitleOrderByModifiedAtDesc(title);
