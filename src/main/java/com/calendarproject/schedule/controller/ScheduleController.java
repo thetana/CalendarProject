@@ -1,8 +1,9 @@
-package com.calendarproject.controller;
+package com.calendarproject.schedule.controller;
 
-import com.calendarproject.dto.*;
-import com.calendarproject.entity.Schedule;
-import com.calendarproject.service.ScheduleService;
+import com.calendarproject.schedule.dto.*;
+import com.calendarproject.schedule.entity.Schedule;
+import com.calendarproject.schedule.service.ScheduleService;
+import com.calendarproject.support.dto.BadRequestDto;
 import com.calendarproject.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

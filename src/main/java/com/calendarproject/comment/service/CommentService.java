@@ -1,9 +1,9 @@
-package com.calendarproject.service;
+package com.calendarproject.comment.service;
 
-import com.calendarproject.dto.CreateCommentRequest;
-import com.calendarproject.dto.CreateCommentResponse;
-import com.calendarproject.entity.Comment;
-import com.calendarproject.repository.CommentRepository;
+import com.calendarproject.comment.dto.CreateCommentRequest;
+import com.calendarproject.comment.dto.CreateCommentResponse;
+import com.calendarproject.comment.entity.Comment;
+import com.calendarproject.comment.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

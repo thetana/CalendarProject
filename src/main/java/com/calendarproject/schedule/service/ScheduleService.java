@@ -1,10 +1,11 @@
-package com.calendarproject.service;
+package com.calendarproject.schedule.service;
 
-import com.calendarproject.dto.*;
-import com.calendarproject.entity.Comment;
-import com.calendarproject.entity.Schedule;
-import com.calendarproject.repository.CommentRepository;
-import com.calendarproject.repository.ScheduleRepository;
+import com.calendarproject.comment.dto.GetCommentsResponse;
+import com.calendarproject.comment.entity.Comment;
+import com.calendarproject.schedule.dto.*;
+import com.calendarproject.schedule.entity.Schedule;
+import com.calendarproject.comment.repository.CommentRepository;
+import com.calendarproject.schedule.repository.ScheduleRepository;
 import com.calendarproject.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

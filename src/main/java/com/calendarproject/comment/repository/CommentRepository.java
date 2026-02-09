@@ -1,6 +1,6 @@
-package com.calendarproject.repository;
+package com.calendarproject.comment.repository;
 
-import com.calendarproject.entity.Comment;
+import com.calendarproject.comment.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

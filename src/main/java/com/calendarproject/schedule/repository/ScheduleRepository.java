@@ -1,6 +1,6 @@
-package com.calendarproject.repository;
+package com.calendarproject.schedule.repository;
 
-import com.calendarproject.entity.Schedule;
+import com.calendarproject.schedule.entity.Schedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

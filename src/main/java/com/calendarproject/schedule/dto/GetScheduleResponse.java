@@ -1,4 +1,6 @@
-package com.calendarproject.dto;
+package com.calendarproject.schedule.dto;
+
+import com.calendarproject.comment.dto.GetCommentsResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.calendarproject.dto;
+package com.calendarproject.schedule.dto;
 
 import java.time.LocalDateTime;
 

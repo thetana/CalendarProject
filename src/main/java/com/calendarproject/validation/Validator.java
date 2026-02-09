@@ -1,7 +1,7 @@
 package com.calendarproject.validation;
 
-import com.calendarproject.dto.BadRequestDto;
-import com.calendarproject.entity.BaseEntity;
+import com.calendarproject.support.dto.BadRequestDto;
+import com.calendarproject.support.entity.BaseEntity;
 import jakarta.persistence.Column;
 
 import java.lang.reflect.Field;

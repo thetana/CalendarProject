@@ -1,8 +1,8 @@
-package com.calendarproject.controller;
+package com.calendarproject.comment.controller;
 
-import com.calendarproject.dto.CreateCommentRequest;
-import com.calendarproject.dto.CreateCommentResponse;
-import com.calendarproject.service.CommentService;
+import com.calendarproject.comment.dto.CreateCommentRequest;
+import com.calendarproject.comment.dto.CreateCommentResponse;
+import com.calendarproject.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
