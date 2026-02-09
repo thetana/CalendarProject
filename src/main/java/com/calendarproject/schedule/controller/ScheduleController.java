@@ -1,8 +1,10 @@
 package com.calendarproject.schedule.controller;
 
+import com.calendarproject.auth.dto.SessionUser;
 import com.calendarproject.schedule.dto.*;
 import com.calendarproject.schedule.entity.Schedule;
 import com.calendarproject.schedule.service.ScheduleService;
+import com.calendarproject.support.constants.Session;
 import com.calendarproject.support.dto.BadRequestDto;
 import com.calendarproject.validation.Validator;
 import lombok.RequiredArgsConstructor;
@@ -19,12 +21,10 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
     @PostMapping("/schedules")
-    public ResponseEntity<?> create(@RequestBody CreateScheduleRequest request) {
-        BadRequestDto dto = Validator.validate(request, Schedule.class);
-        if(!dto.isOk()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
-        }
-        CreateScheduleResponse result = scheduleService.save(request);
+    public ResponseEntity<?> create(
+            @SessionAttribute(name = Session.USER, required = false) SessionUser sessionUser,
+            @RequestBody CreateScheduleRequest request) {
+        CreateScheduleResponse result = scheduleService.save(sessionUser, request);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
@@ -45,13 +45,12 @@ public class ScheduleController {
     }
 
     @PatchMapping("/schedules/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody UpdateScheduleRequest request) {
+    public ResponseEntity<?> update(
+            @SessionAttribute(name = Session.USER, required = false) SessionUser sessionUser,
+            @PathVariable Long id,
+            @RequestBody UpdateScheduleRequest request) {
         try {
-            BadRequestDto dto = Validator.validate(request, Schedule.class);
-            if(!dto.isOk()){
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);
-            }
-            UpdateScheduleResponse result = scheduleService.update(id, request);
+            UpdateScheduleResponse result = scheduleService.update(sessionUser, id, request);
             return ResponseEntity.status(HttpStatus.OK).body(result);
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -61,9 +60,11 @@ public class ScheduleController {
     }
 
     @DeleteMapping("/schedules/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id, @RequestBody DeleteScheduleRequest request) {
+    public ResponseEntity<Void> delete(
+            @SessionAttribute(name = Session.USER, required = false) SessionUser sessionUser,
+            @PathVariable Long id) {
         try {
-            scheduleService.delete(id, request);
+            scheduleService.delete(sessionUser, id);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

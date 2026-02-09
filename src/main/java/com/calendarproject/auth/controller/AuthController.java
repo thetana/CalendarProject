@@ -3,6 +3,7 @@ package com.calendarproject.auth.controller;
 
 import com.calendarproject.auth.dto.*;
 import com.calendarproject.auth.service.AuthService;
+import com.calendarproject.support.constants.Session;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,12 +23,12 @@ public class AuthController {
     @PostMapping("/auth/signin")
     public ResponseEntity<AuthSigninResponse> signin(@RequestBody AuthSigninRequest request, HttpSession httpSession) {
         SessionUser sessionUser = authService.signin(request);
-        httpSession.setAttribute("loginUser", sessionUser);
+        httpSession.setAttribute(Session.USER, sessionUser);
         return ResponseEntity.status(HttpStatus.OK).body(new AuthSigninResponse(sessionUser.id()));
     }
 
     @PostMapping("/auth/signout")
-    public ResponseEntity<Void> signout(@SessionAttribute(name = "loginUser", required = false) SessionUser sessionUser, HttpSession httpSession) {
+    public ResponseEntity<Void> signout(@SessionAttribute(name = Session.USER, required = false) SessionUser sessionUser, HttpSession httpSession) {
         if (sessionUser == null) {
             return ResponseEntity.badRequest().build();
         }

@@ -1,6 +1,7 @@
 package com.calendarproject.schedule.entity;
 
 import com.calendarproject.support.entity.BaseEntity;
+import com.calendarproject.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -14,24 +15,25 @@ public class Schedule extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 30, nullable = false)
-    private String title;
-    @Column(length = 200, nullable = false)
-    private String details;
-    @Column(length = 30, nullable = false)
-    private String writer;
-    @Column(nullable = false)
-    private String password;
 
-    public Schedule(String title, String details, String writer, String password) {
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @Column(length = 100, nullable = false)
+    private String title;
+    @Lob
+    @Column(nullable = false)
+    private String details;
+
+    public Schedule(User user, String title, String details) {
+        this.user = user;
         this.title = title;
         this.details = details;
-        this.writer = writer;
-        this.password = password;
     }
 
-    public void update(String title, String writer) {
+    public void update(String title, String details) {
         this.title = title;
-        this.writer = writer;
+        this.details = details;
     }
 }

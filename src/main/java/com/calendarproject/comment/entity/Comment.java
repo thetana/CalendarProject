@@ -1,6 +1,8 @@
 package com.calendarproject.comment.entity;
 
+import com.calendarproject.schedule.entity.Schedule;
 import com.calendarproject.support.entity.BaseEntity;
+import com.calendarproject.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -14,19 +16,22 @@ public class Comment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 100, nullable = false)
-    private String content;
-    @Column(length = 30, nullable = false)
-    private String writer;
-    @Column(nullable = false)
-    private Long scheduleId;
-    @Column(nullable = false)
-    private String password;
 
-    public Comment(Long scheduleId, String content, String writer, String password) {
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "schedule_id", nullable = false)
+    private Schedule schedule;
+
+    @Lob
+    @Column(nullable = false)
+    private String content;
+
+    public Comment(User user, Schedule schedule, String content) {
+        this.user = user;
+        this.schedule = schedule;
         this.content = content;
-        this.writer = writer;
-        this.scheduleId = scheduleId;
-        this.password = password;
     }
 }
