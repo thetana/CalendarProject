@@ -5,7 +5,7 @@ import com.calendarproject.auth.dto.AuthSigninRequest;
 import com.calendarproject.auth.dto.AuthSignupRequest;
 import com.calendarproject.auth.dto.AuthSignupResponse;
 import com.calendarproject.auth.dto.SessionUser;
-import com.calendarproject.support.security.PasswordEncoder;
+import com.calendarproject.common.security.PasswordEncoder;
 import com.calendarproject.user.entity.User;
 import com.calendarproject.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

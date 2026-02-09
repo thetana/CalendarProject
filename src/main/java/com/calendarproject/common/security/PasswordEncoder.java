@@ -1,4 +1,4 @@
-package com.calendarproject.support.security;
+package com.calendarproject.common.security;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;

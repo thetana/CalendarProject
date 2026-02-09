@@ -2,11 +2,9 @@ package com.calendarproject.schedule.controller;
 
 import com.calendarproject.auth.dto.SessionUser;
 import com.calendarproject.schedule.dto.*;
-import com.calendarproject.schedule.entity.Schedule;
 import com.calendarproject.schedule.service.ScheduleService;
-import com.calendarproject.support.constants.Session;
-import com.calendarproject.support.dto.BadRequestDto;
-import com.calendarproject.validation.Validator;
+import com.calendarproject.common.constants.Session;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +21,7 @@ public class ScheduleController {
     @PostMapping("/schedules")
     public ResponseEntity<?> create(
             @SessionAttribute(name = Session.USER, required = false) SessionUser sessionUser,
-            @RequestBody CreateScheduleRequest request) {
+            @Valid @RequestBody CreateScheduleRequest request) {
         CreateScheduleResponse result = scheduleService.save(sessionUser, request);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }

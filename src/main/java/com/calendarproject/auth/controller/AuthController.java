@@ -3,7 +3,7 @@ package com.calendarproject.auth.controller;
 
 import com.calendarproject.auth.dto.*;
 import com.calendarproject.auth.service.AuthService;
-import com.calendarproject.support.constants.Session;
+import com.calendarproject.common.constants.Session;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
