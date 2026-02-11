@@ -1,23 +1,22 @@
 package com.calendarproject.schedule.dto;
 
+import com.calendarproject.comment.dto.GetCommentsResponse;
+import com.calendarproject.schedule.entity.Schedule;
 import org.springframework.data.domain.Page;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-public record GetSchedulesResponse<T>(
-        List<T> content,
-        int page,
-        int size,
-        long totalElements,
-        int totalPages
-) {
-    public static <T> GetSchedulesResponse<T> from(Page<T> page) {
-        return new GetSchedulesResponse<>(
-                page.getContent(),
-                page.getNumber(),
-                page.getSize(),
-                page.getTotalElements(),
-                page.getTotalPages()
+public record GetSchedulesResponse(Long id, Long userId, String title, String details, LocalDateTime createdAt,
+                                   LocalDateTime modifiedAt) {
+    public static GetSchedulesResponse from(Schedule page) {
+        return new GetSchedulesResponse(
+                page.getId(),
+                page.getUserId(),
+                page.getTitle(),
+                page.getDetails(),
+                page.getCreatedAt(),
+                page.getModifiedAt()
         );
     }
 }

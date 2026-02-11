@@ -27,8 +27,8 @@ public class ScheduleController {
     }
 
     @GetMapping("/schedules")
-    public ResponseEntity<GetSchedulesResponse> getAll(Pageable pageable, @RequestParam(required = false) String title) {
-        GetSchedulesResponse result = scheduleService.getAll(pageable, title);
+    public ResponseEntity<GetPageResponse> getAll(Pageable pageable, @RequestParam(required = false) String title) {
+        GetPageResponse result = scheduleService.getAll(pageable, title);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 

@@ -29,13 +29,13 @@ public class ScheduleService {
         User user = userRepository.findById(sessionUser.id()).orElseThrow(
                 () -> new IllegalStateException("존재하지 않는 유저입니다.")
         );
-        Schedule schedule = new Schedule(user,
+        Schedule schedule = new Schedule(user.getId(),
                 request.title(),
                 request.details()
         );
         Schedule savedSchedule = scheduleRepository.save(schedule);
         return new CreateScheduleResponse(savedSchedule.getId(),
-                savedSchedule.getUser().getId(),
+                savedSchedule.getUserId(),
                 savedSchedule.getTitle(),
                 savedSchedule.getDetails(),
                 savedSchedule.getCreatedAt(),
@@ -43,25 +43,14 @@ public class ScheduleService {
     }
 
     @Transactional(readOnly = true)
-    public GetSchedulesResponse getAll(Pageable pageable, String title) {
-        Page<Schedule> schedules;
+    public GetPageResponse getAll(Pageable pageable, String title) {
+        Page<GetSchedulesResponse> schedules;
         if (Validator.isNullOrEmpty(title)) {
-            schedules = scheduleRepository.findAllByOrderByModifiedAtDesc(pageable);
+            schedules = scheduleRepository.findAllByOrderByModifiedAtDesc(pageable).map(GetSchedulesResponse::from);;
         } else {
-            schedules = scheduleRepository.findByTitleOrderByModifiedAtDesc(pageable, title);
+            schedules = scheduleRepository.findByTitleOrderByModifiedAtDesc(pageable, title).map(GetSchedulesResponse::from);;
         }
-//        List<GetSchedulesResponse> dtos = new ArrayList<>();
-//        for (Schedule schedule : schedules) {
-//            GetSchedulesResponse dto = new GetSchedulesResponse(schedule.getId(),
-//                    schedule.getUser().getId(),
-//                    schedule.getTitle(),
-//                    schedule.getDetails(),
-//                    schedule.getCreatedAt(),
-//                    schedule.getModifiedAt());
-//            dtos.add(dto);
-//        }
-//        return dtos;
-        return GetSchedulesResponse.from(schedules);
+        return GetPageResponse.from(schedules);
     }
 
     @Transactional(readOnly = true)
@@ -71,7 +60,7 @@ public class ScheduleService {
         );
         return new GetScheduleResponse(
                 schedule.getId(),
-                schedule.getUser().getId(),
+                schedule.getUserId(),
                 schedule.getTitle(),
                 schedule.getDetails(),
                 commentService.findAll(id),
@@ -85,7 +74,7 @@ public class ScheduleService {
         Schedule schedule = scheduleRepository.findById(id).orElseThrow(
                 () -> new NoSuchElementException("존재하지 않는 일정 입니다.")
         );
-        if (!ObjectUtils.nullSafeEquals(sessionUser.id(), schedule.getUser().getId())) {
+        if (!ObjectUtils.nullSafeEquals(sessionUser.id(), schedule.getUserId())) {
             throw new IllegalStateException("작성자가 다릅니다.");
         }
         schedule.update(
@@ -94,7 +83,7 @@ public class ScheduleService {
         );
         UpdateScheduleResponse response = new UpdateScheduleResponse(
                 schedule.getId(),
-                schedule.getUser().getId(),
+                schedule.getUserId(),
                 schedule.getTitle(),
                 schedule.getDetails(),
                 schedule.getModifiedAt()
@@ -107,7 +96,7 @@ public class ScheduleService {
         Schedule schedule = scheduleRepository.findById(id).orElseThrow(
                 () -> new NoSuchElementException("존재하지 않는 일정 입니다.")
         );
-        if (!ObjectUtils.nullSafeEquals(sessionUser.id(), schedule.getUser().getId())) {
+        if (!ObjectUtils.nullSafeEquals(sessionUser.id(), schedule.getUserId())) {
             throw new IllegalStateException("작성자가 다릅니다.");
         }
         scheduleRepository.deleteById(id);
