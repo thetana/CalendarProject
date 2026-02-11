@@ -1,4 +1,4 @@
-package com.calendarproject.common.security;
+package com.calendarproject.core.security;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;

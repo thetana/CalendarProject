@@ -7,7 +7,7 @@ import com.calendarproject.auth.dto.admin.AuthAdminSigninResponse;
 import com.calendarproject.auth.dto.admin.AuthAdminSignupRequest;
 import com.calendarproject.auth.dto.admin.AuthAdminSignupResponse;
 import com.calendarproject.auth.service.AuthService;
-import com.calendarproject.common.constants.Session;
+import com.calendarproject.core.constants.Session;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

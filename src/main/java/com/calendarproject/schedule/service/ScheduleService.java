@@ -7,13 +7,13 @@ import com.calendarproject.schedule.entity.Schedule;
 import com.calendarproject.schedule.repository.ScheduleRepository;
 import com.calendarproject.user.entity.User;
 import com.calendarproject.user.repository.UserRepository;
-import com.calendarproject.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.NoSuchElementException;
 
@@ -45,11 +45,12 @@ public class ScheduleService {
     @Transactional(readOnly = true)
     public GetPageResponse getAll(Pageable pageable, String title) {
         Page<GetSchedulesResponse> schedules;
-        if (Validator.isNullOrEmpty(title)) {
-            schedules = scheduleRepository.findAllByOrderByModifiedAtDesc(pageable).map(GetSchedulesResponse::from);;
-        } else {
-            schedules = scheduleRepository.findByTitleOrderByModifiedAtDesc(pageable, title).map(GetSchedulesResponse::from);;
-        }
+//        if (StringUtils.hasText(title)) {
+//            schedules = scheduleRepository.findByTitleOrderByModifiedAtDesc(pageable, title).map(GetSchedulesResponse::from);
+//        } else {
+//            schedules = scheduleRepository.findAllByOrderByModifiedAtDesc(pageable).map(GetSchedulesResponse::from);
+//        }
+        schedules = scheduleRepository.search(pageable, title);
         return GetPageResponse.from(schedules);
     }
 

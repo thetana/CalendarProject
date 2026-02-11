@@ -3,7 +3,7 @@ package com.calendarproject.user.service;
 
 
 import com.calendarproject.auth.dto.SessionUser;
-import com.calendarproject.common.security.PasswordEncoder;
+import com.calendarproject.core.security.PasswordEncoder;
 import com.calendarproject.user.dto.DeleteUserRequest;
 import com.calendarproject.user.dto.GetUserResponse;
 import com.calendarproject.user.dto.UpdateUserRequest;

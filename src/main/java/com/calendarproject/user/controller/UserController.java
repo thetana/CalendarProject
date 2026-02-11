@@ -1,7 +1,7 @@
 package com.calendarproject.user.controller;
 
 import com.calendarproject.auth.dto.SessionUser;
-import com.calendarproject.common.constants.Session;
+import com.calendarproject.core.constants.Session;
 import com.calendarproject.user.dto.DeleteUserRequest;
 import com.calendarproject.user.dto.GetUserResponse;
 import com.calendarproject.user.dto.UpdateUserRequest;

@@ -1,7 +1,6 @@
 package com.calendarproject.schedule.entity;
 
-import com.calendarproject.common.entity.BaseEntity;
-import com.calendarproject.user.entity.User;
+import com.calendarproject.core.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

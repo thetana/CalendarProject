@@ -3,7 +3,7 @@ package com.calendarproject.schedule.controller;
 import com.calendarproject.auth.dto.SessionUser;
 import com.calendarproject.schedule.dto.*;
 import com.calendarproject.schedule.service.ScheduleService;
-import com.calendarproject.common.constants.Session;
+import com.calendarproject.core.constants.Session;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
