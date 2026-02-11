@@ -6,7 +6,6 @@ import com.calendarproject.comment.dto.CreateCommentResponse;
 import com.calendarproject.comment.dto.GetCommentsResponse;
 import com.calendarproject.comment.entity.Comment;
 import com.calendarproject.comment.repository.CommentRepository;
-import com.calendarproject.schedule.dto.GetSchedulesResponse;
 import com.calendarproject.schedule.entity.Schedule;
 import com.calendarproject.schedule.repository.ScheduleRepository;
 import com.calendarproject.user.entity.User;

@@ -1,23 +1,20 @@
 package com.calendarproject.schedule.service;
 
 import com.calendarproject.auth.dto.SessionUser;
-import com.calendarproject.comment.dto.GetCommentsResponse;
-import com.calendarproject.comment.entity.Comment;
 import com.calendarproject.comment.service.CommentService;
 import com.calendarproject.schedule.dto.*;
 import com.calendarproject.schedule.entity.Schedule;
-import com.calendarproject.comment.repository.CommentRepository;
 import com.calendarproject.schedule.repository.ScheduleRepository;
 import com.calendarproject.user.entity.User;
 import com.calendarproject.user.repository.UserRepository;
 import com.calendarproject.validation.Validator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -46,24 +43,25 @@ public class ScheduleService {
     }
 
     @Transactional(readOnly = true)
-    public List<GetSchedulesResponse> getAll(String title) {
-        List<Schedule> schedules;
+    public GetSchedulesResponse getAll(Pageable pageable, String title) {
+        Page<Schedule> schedules;
         if (Validator.isNullOrEmpty(title)) {
-            schedules = scheduleRepository.findAllByOrderByModifiedAtDesc();
+            schedules = scheduleRepository.findAllByOrderByModifiedAtDesc(pageable);
         } else {
-            schedules = scheduleRepository.findByTitleOrderByModifiedAtDesc(title);
+            schedules = scheduleRepository.findByTitleOrderByModifiedAtDesc(pageable, title);
         }
-        List<GetSchedulesResponse> dtos = new ArrayList<>();
-        for (Schedule schedule : schedules) {
-            GetSchedulesResponse dto = new GetSchedulesResponse(schedule.getId(),
-                    schedule.getUser().getId(),
-                    schedule.getTitle(),
-                    schedule.getDetails(),
-                    schedule.getCreatedAt(),
-                    schedule.getModifiedAt());
-            dtos.add(dto);
-        }
-        return dtos;
+//        List<GetSchedulesResponse> dtos = new ArrayList<>();
+//        for (Schedule schedule : schedules) {
+//            GetSchedulesResponse dto = new GetSchedulesResponse(schedule.getId(),
+//                    schedule.getUser().getId(),
+//                    schedule.getTitle(),
+//                    schedule.getDetails(),
+//                    schedule.getCreatedAt(),
+//                    schedule.getModifiedAt());
+//            dtos.add(dto);
+//        }
+//        return dtos;
+        return GetSchedulesResponse.from(schedules);
     }
 
     @Transactional(readOnly = true)

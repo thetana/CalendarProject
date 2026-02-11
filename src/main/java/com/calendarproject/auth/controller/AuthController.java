@@ -2,6 +2,10 @@ package com.calendarproject.auth.controller;
 
 
 import com.calendarproject.auth.dto.*;
+import com.calendarproject.auth.dto.admin.AuthAdminSigninRequest;
+import com.calendarproject.auth.dto.admin.AuthAdminSigninResponse;
+import com.calendarproject.auth.dto.admin.AuthAdminSignupRequest;
+import com.calendarproject.auth.dto.admin.AuthAdminSignupResponse;
 import com.calendarproject.auth.service.AuthService;
 import com.calendarproject.common.constants.Session;
 import jakarta.servlet.http.HttpSession;
@@ -35,5 +39,19 @@ public class AuthController {
 
         httpSession.invalidate();
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+
+
+
+    @PostMapping("/auth/admin/signup")
+    public ResponseEntity<AuthAdminSignupResponse> adminSignup(@RequestBody AuthAdminSignupRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(authService.adminSignup(request));
+    }
+
+    @PostMapping("/auth/admin/signin")
+    public ResponseEntity<AuthAdminSigninResponse> adminSignin(@RequestBody AuthAdminSigninRequest request) {
+        String token = authService.adminSignin(request);
+        return ResponseEntity.status(HttpStatus.OK).body(new AuthAdminSigninResponse(token));
     }
 }

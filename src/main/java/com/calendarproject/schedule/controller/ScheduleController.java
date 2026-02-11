@@ -6,11 +6,11 @@ import com.calendarproject.schedule.service.ScheduleService;
 import com.calendarproject.common.constants.Session;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -27,8 +27,8 @@ public class ScheduleController {
     }
 
     @GetMapping("/schedules")
-    public ResponseEntity<List<GetSchedulesResponse>> getAll(@RequestParam(required = false) String title) {
-        List<GetSchedulesResponse> result = scheduleService.getAll(title);
+    public ResponseEntity<GetSchedulesResponse> getAll(Pageable pageable, @RequestParam(required = false) String title) {
+        GetSchedulesResponse result = scheduleService.getAll(pageable, title);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
