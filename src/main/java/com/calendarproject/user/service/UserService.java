@@ -3,7 +3,6 @@ package com.calendarproject.user.service;
 
 
 import com.calendarproject.auth.dto.SessionUser;
-import com.calendarproject.core.security.PasswordEncoder;
 import com.calendarproject.user.dto.DeleteUserRequest;
 import com.calendarproject.user.dto.GetUserResponse;
 import com.calendarproject.user.dto.UpdateUserRequest;
@@ -11,6 +10,7 @@ import com.calendarproject.user.dto.UpdateUserResponse;
 import com.calendarproject.user.entity.User;
 import com.calendarproject.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

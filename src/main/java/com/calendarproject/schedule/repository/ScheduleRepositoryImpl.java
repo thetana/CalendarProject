@@ -4,7 +4,9 @@ import com.calendarproject.comment.entity.QComment;
 import com.calendarproject.schedule.dto.GetSchedulesResponse;
 import com.calendarproject.schedule.dto.QGetSchedulesResponse;
 import com.calendarproject.schedule.entity.QSchedule;
+import com.calendarproject.user.entity.QUser;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -12,6 +14,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+
+import static aQute.bnd.annotation.headers.Category.users;
 
 @RequiredArgsConstructor
 public class ScheduleRepositoryImpl implements ScheduleRepositoryCustom {
@@ -23,21 +27,24 @@ public class ScheduleRepositoryImpl implements ScheduleRepositoryCustom {
 
         QSchedule schedule = QSchedule.schedule;
         QComment comment = QComment.comment;
+        QUser user = QUser.user;
 
         List<GetSchedulesResponse> content = queryFactory
                 .select(new QGetSchedulesResponse(
                         schedule.id,
-                        schedule.userId,
+                        user.name.as("userName"),
                         schedule.title,
                         schedule.details,
-                        comment.id.count(),
+                        JPAExpressions
+                                .select(comment.count())
+                                .from(comment)
+                                .where(comment.schedule.id.eq(schedule.id)),
                         schedule.createdAt,
                         schedule.modifiedAt
                 ))
                 .from(schedule)
-                .leftJoin(comment).on(comment.schedule.id.eq(schedule.id))
+                .leftJoin(user).on(schedule.userId.eq(user.id))
                 .where(titleContains(title))
-                .groupBy(schedule.id)
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();

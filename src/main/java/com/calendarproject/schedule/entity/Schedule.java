@@ -5,11 +5,18 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 @Getter
 @Entity
-@Table(name = "schedules")
+@Table(name = "schedules",
+        indexes = {
+                @Index(name = "idx_schedules_deleted_at", columnList = "deleted_at")
+        })
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SQLDelete(sql = "UPDATE schedules SET deleted_at = now() WHERE id = ?")
+@SQLRestriction("deleted_at IS NULL")
 public class Schedule extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

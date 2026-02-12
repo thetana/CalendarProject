@@ -16,6 +16,16 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
+springdoc:
+  enable-querydsl: false
 
 server:
   port: 8080
+
+logging:
+  level:
+    root: info
+
+jwt:
+  secret: nG9QhQWm4f8+YkqC2k0R2g6v7JpH9XlV3Wb1TzQ8sYc=
+  access-token-validity: 3600000

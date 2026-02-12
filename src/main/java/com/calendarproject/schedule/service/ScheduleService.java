@@ -45,11 +45,6 @@ public class ScheduleService {
     @Transactional(readOnly = true)
     public GetPageResponse getAll(Pageable pageable, String title) {
         Page<GetSchedulesResponse> schedules;
-//        if (StringUtils.hasText(title)) {
-//            schedules = scheduleRepository.findByTitleOrderByModifiedAtDesc(pageable, title).map(GetSchedulesResponse::from);
-//        } else {
-//            schedules = scheduleRepository.findAllByOrderByModifiedAtDesc(pageable).map(GetSchedulesResponse::from);
-//        }
         schedules = scheduleRepository.search(pageable, title);
         return GetPageResponse.from(schedules);
     }

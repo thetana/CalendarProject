@@ -2,16 +2,18 @@ package com.calendarproject.auth.service;
 
 
 import com.calendarproject.admin.entity.Admin;
+import com.calendarproject.admin.enums.AdminRoleEnum;
 import com.calendarproject.admin.repository.AdminRepository;
 import com.calendarproject.auth.dto.*;
 import com.calendarproject.auth.dto.admin.AuthAdminSigninRequest;
 import com.calendarproject.auth.dto.admin.AuthAdminSignupRequest;
 import com.calendarproject.auth.dto.admin.AuthAdminSignupResponse;
 import com.calendarproject.core.security.JwtProvider;
-import com.calendarproject.core.security.PasswordEncoder;
+
 import com.calendarproject.user.entity.User;
 import com.calendarproject.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,7 +70,7 @@ public class AuthService {
         Admin admin = new Admin(
                 request.id(),
                 encodedPassword,
-                ""
+                AdminRoleEnum.ADMIN
         );
         Admin savedAdmin = adminRepository.save(admin);
         return new AuthAdminSignupResponse(

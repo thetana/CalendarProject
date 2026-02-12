@@ -21,4 +21,25 @@ public abstract class BaseEntity {
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime modifiedAt;
+
+
+    @Column(name = "deleted_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime deletedAt;
+
+    public void delete() {
+        this.deletedAt = LocalDateTime.now();
+    }
+
+    public void restore() {
+        this.deletedAt = null;
+    }
+
+    public boolean isDeleted() {
+        return this.deletedAt != null;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
 }

@@ -1,5 +1,6 @@
 package com.calendarproject.admin.entity;
 
+import com.calendarproject.admin.enums.AdminRoleEnum;
 import com.calendarproject.core.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -14,9 +15,10 @@ public class Admin extends BaseEntity {
     @Id
     private String id;
     private String password;
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private AdminRoleEnum role;
 
-    public Admin(String id, String password, String role) {
+    public Admin(String id, String password, AdminRoleEnum role) {
         this.id = id;
         this.password = password;
         this.role = role;

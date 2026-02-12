@@ -8,7 +8,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ScheduleRepository extends JpaRepository<Schedule, Long>,ScheduleRepositoryCustom {
     Page<GetSchedulesResponse> search(Pageable pageable, String title);
-    Page<Schedule> findByTitleOrderByModifiedAtDesc(Pageable pageable, String title);
-    Page<Schedule> findAllByOrderByModifiedAtDesc(Pageable pageable);
-
 }
