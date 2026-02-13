@@ -183,7 +183,7 @@ Status Code: 200(성공)
 ### 선택한 유저 수정
 Request 
 |Method|URL|Content-Type|
-|:-:|:-:|:-:|:-:|
+|:-:|:-:|:-:|
 |PATCH|/users|application/json|
 * Body:
   ```json
@@ -215,7 +215,7 @@ Response
 ### 선택한 유저 삭제
 Request 
 |Method|URL|Content-Type|
-|:-:|:-:|:-:|:-:|
+|:-:|:-:|:-:|
 |DELETE|schedules/{id}|application/json|
 * Body:
   ```json
