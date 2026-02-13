@@ -1,4 +1,4 @@
-package com.calendarproject.core.security;
+package com.calendarproject.common.security;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
-package com.calendarproject.core.security;
+package com.calendarproject.common.security;
 
-import com.calendarproject.core.dto.JwtAdminInfo;
+import com.calendarproject.common.dto.JwtAdminInfo;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

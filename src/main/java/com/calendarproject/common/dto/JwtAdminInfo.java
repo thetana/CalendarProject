@@ -1,4 +1,4 @@
-package com.calendarproject.core.dto;
+package com.calendarproject.common.dto;
 
 import com.calendarproject.admin.enums.AdminRoleEnum;
 

@@ -1,7 +1,7 @@
-package com.calendarproject.core.config;
+package com.calendarproject.common.config;
 
-import com.calendarproject.core.security.JwtAuthenticationFilter;
-import com.calendarproject.core.security.JwtProvider;
+import com.calendarproject.common.security.JwtAuthenticationFilter;
+import com.calendarproject.common.security.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

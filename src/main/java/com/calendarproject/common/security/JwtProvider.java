@@ -1,7 +1,7 @@
-package com.calendarproject.core.security;
+package com.calendarproject.common.security;
 
 import com.calendarproject.admin.enums.AdminRoleEnum;
-import com.calendarproject.core.dto.JwtAdminInfo;
+import com.calendarproject.common.dto.JwtAdminInfo;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

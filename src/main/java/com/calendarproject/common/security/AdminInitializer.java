@@ -1,4 +1,4 @@
-package com.calendarproject.core.security;
+package com.calendarproject.common.security;
 
 import com.calendarproject.admin.entity.Admin;
 import com.calendarproject.admin.enums.AdminRoleEnum;

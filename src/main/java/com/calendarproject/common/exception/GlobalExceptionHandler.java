@@ -1,4 +1,4 @@
-package com.calendarproject.core.exception;
+package com.calendarproject.common.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

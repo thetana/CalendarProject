@@ -8,7 +8,7 @@ import com.calendarproject.auth.dto.*;
 import com.calendarproject.auth.dto.admin.AuthAdminSigninRequest;
 import com.calendarproject.auth.dto.admin.AuthAdminSignupRequest;
 import com.calendarproject.auth.dto.admin.AuthAdminSignupResponse;
-import com.calendarproject.core.security.JwtProvider;
+import com.calendarproject.common.security.JwtProvider;
 
 import com.calendarproject.user.entity.User;
 import com.calendarproject.user.repository.UserRepository;

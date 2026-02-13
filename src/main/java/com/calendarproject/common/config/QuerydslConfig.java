@@ -1,4 +1,4 @@
-package com.calendarproject.core.config;
+package com.calendarproject.common.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;

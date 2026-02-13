@@ -1,6 +1,6 @@
 package com.calendarproject.comment.entity;
 
-import com.calendarproject.core.entity.BaseEntity;
+import com.calendarproject.common.entity.BaseEntity;
 import com.calendarproject.schedule.entity.Schedule;
 import com.calendarproject.user.entity.User;
 import jakarta.persistence.*;

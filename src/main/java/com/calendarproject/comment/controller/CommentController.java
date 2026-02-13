@@ -5,7 +5,7 @@ import com.calendarproject.comment.dto.CreateCommentRequest;
 import com.calendarproject.comment.dto.CreateCommentResponse;
 import com.calendarproject.comment.dto.GetCommentsResponse;
 import com.calendarproject.comment.service.CommentService;
-import com.calendarproject.core.constants.Session;
+import com.calendarproject.common.constants.Session;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

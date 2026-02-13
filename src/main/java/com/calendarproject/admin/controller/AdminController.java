@@ -1,7 +1,7 @@
 package com.calendarproject.admin.controller;
 
 import com.calendarproject.admin.enums.AdminRoleEnum;
-import com.calendarproject.core.dto.JwtAdminInfo;
+import com.calendarproject.common.dto.JwtAdminInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -1,7 +1,7 @@
 package com.calendarproject.admin.entity;
 
 import com.calendarproject.admin.enums.AdminRoleEnum;
-import com.calendarproject.core.entity.BaseEntity;
+import com.calendarproject.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
